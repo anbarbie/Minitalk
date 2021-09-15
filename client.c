@@ -16,15 +16,15 @@ static void		send_binary(char c, int pid)
 {
 	int		i;
 
-	i = 0;
-	while (i++ < 8)
+	i = 7;
+	while (i >= 0)
 	{
-		if (c & 0x01)
+		if ((c >> i) & 1)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		c = c >> 1;
 		usleep(100);
+		i--;
 	}
 }
 

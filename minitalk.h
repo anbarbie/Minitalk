@@ -22,7 +22,6 @@
 typedef struct		sbuff
 {
 	char			str[BUFFER];
-	unsigned char	set;
 	int				cpt;
 }					tbuff;
 

@@ -12,12 +12,20 @@
 
 #include "minitalk.h"
 
-tbuff s;
+static tbuff s;
 
-static	void 	set_struct()
+static	void	print_pid()
 {
+	ft_putstr_fd("PID = ", 1);
+	ft_putnbr_fd((int)getpid(), 1);
+	ft_putstr_fd("\n", 1);
+}
+
+static	void 	reset_struct()
+{
+	if (s.cpt != BUFFER)
+		ft_putchar_fd('\n', 1);
 	ft_memset(s.str, 0, s.cpt);
-	s.set = 128;
 	s.cpt = 0;
 }
 
@@ -27,7 +35,7 @@ static 	void	sig_handler(int signum)
 	static unsigned char		tmp = 0;
 
 	if (signum == SIGUSR2)
-		tmp |= s.set;
+		tmp |= 1;
 	if (i == 7)
 	{
 		s.str[s.cpt] = tmp;
@@ -35,11 +43,12 @@ static 	void	sig_handler(int signum)
 		s.cpt++;
 		if (s.cpt == BUFFER || s.str[s.cpt - 1] == '\0')
 		{
-			ft_putendl_fd(s.str, 1);
-			set_struct();
+			tmp = 0;
+			write(1, &s.str, s.cpt);
+			reset_struct();
 		}
 	}
-	tmp = tmp >> 1;
+	tmp <<= 1;
 	i++;
 }
 
@@ -49,14 +58,13 @@ int		main(void)
 
 	sa.sa_handler = sig_handler;
 	sa.sa_flags = SA_SIGINFO;
-	set_struct();
+	s.cpt = 0;
 	ft_memset(s.str, 0, BUFFER);
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-	ft_putstr_fd("PID = ", 1);
-	ft_putnbr_fd((int)getpid(), 1);
-	ft_putstr_fd("\n", 1);
+	print_pid();
 	while (1)
-		usleep(100);
+	{
+		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
+	}
 	return (0);
 }
