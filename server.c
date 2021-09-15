@@ -25,7 +25,7 @@ static	void 	reset_struct()
 {
 	if (s.cpt != BUFFER)
 		ft_putchar_fd('\n', 1);
-	ft_memset(s.str, 0, s.cpt);
+	ft_bzero(s.str, s.cpt);
 	s.cpt = 0;
 }
 
@@ -43,6 +43,8 @@ static 	void	sig_handler(int signum)
 		s.cpt++;
 		if (s.cpt == BUFFER || s.str[s.cpt - 1] == '\0')
 		{
+			if (!s.str[0])
+				write(1 , "Signal caught!\n", 14);
 			tmp = 0;
 			write(1, &s.str, s.cpt);
 			reset_struct();

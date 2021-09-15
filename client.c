@@ -37,6 +37,7 @@ int				main(int ac, char **av)
 	{
 		pid = ft_atoi(av[1]);
 		str = av[2];
+		send_binary('\0', pid);
 		while (*str)
 		{
 			send_binary(*str, pid);
