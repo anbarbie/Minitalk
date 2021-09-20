@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
 # define BUFFER 1024
 
 typedef struct s_buff
@@ -24,5 +23,13 @@ typedef struct s_buff
 	char			str[BUFFER];
 	int				cpt;
 }					t_buff;
+
+int					ft_atoi(const char *str);
+void				*ft_memset(void *s, int c, size_t n);
+void				ft_bzero(void *s, size_t n);
+void				ft_putchar_fd(char c, int fd);
+void				ft_putstr_fd(char *s, int fd);
+void				ft_putendl_fd(char *s, int fd);
+void				ft_putnbr_fd(int n, int fd);
 
 #endif

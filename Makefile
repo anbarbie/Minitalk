@@ -14,19 +14,17 @@ NAME1= server
 
 NAME2= client
 
-LIB= libft/libft.a
+SRCS= srcs/ft_atoi.c srcs/ft_bzero.c srcs/ft_memset.c srcs/ft_putchar_fd.c \
+srcs/ft_putendl_fd.c srcs/ft_putnbr_fd.c  srcs/ft_putstr_fd.c
 
 all :
-	make -C libft
-	gcc -Wall -Wextra -Werror -o $(NAME1) server.c $(LIB)
-	gcc -Wall -Wextra -Werror -o $(NAME2) client.c $(LIB)
+	gcc -Wall -Wextra -Werror -o $(NAME1) server.c $(SRCS)
+	gcc -Wall -Wextra -Werror -o $(NAME2) client.c $(SRCS)
 
 clean :
-	make clean -C libft
 	rm -rf client.o server.o
 
 fclean : clean
-	make fclean -C libft
 	rm -rf $(NAME1) $(NAME2)
 
 re : fclean all

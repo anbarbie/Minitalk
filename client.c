@@ -14,9 +14,10 @@
 
 static int		g_ack;
 
-static	void	rec_ack(void)
+static	void	rec_ack(int signum)
 {
-	g_ack = 1;
+	if (signum == SIGUSR1)
+		g_ack = 1;
 	return ;
 }
 
@@ -41,7 +42,7 @@ int	main(int ac, char **av)
 	char	*str;
 	int		pid;
 
-	ack = 0;
+	g_ack = 0;
 	signal(SIGUSR1, rec_ack);
 	if (ac == 3)
 	{

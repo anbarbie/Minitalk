@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-static tbuff	g_s;
+static t_buff	g_s;
 
 static	void	print_pid(void)
 {
@@ -23,10 +23,10 @@ static	void	print_pid(void)
 
 static	void	reset_struct(void)
 {
-	if (s.cpt != BUFFER)
+	if (g_s.cpt != BUFFER)
 		ft_putchar_fd('\n', 1);
-	ft_bzero(s.str, s.cpt);
-	s.cpt = 0;
+	ft_bzero(g_s.str, g_s.cpt);
+	g_s.cpt = 0;
 }
 
 static	void	sig_handler(int signum, siginfo_t *info, void *context)
@@ -39,13 +39,13 @@ static	void	sig_handler(int signum, siginfo_t *info, void *context)
 		tmp |= 1;
 	if (i == 7)
 	{
-		s.str[s.cpt] = tmp;
+		g_s.str[g_s.cpt] = tmp;
 		i = -1;
-		s.cpt++;
-		if (s.cpt == BUFFER || s.str[s.cpt - 1] == '\0')
+		g_s.cpt++;
+		if (g_s.cpt == BUFFER || g_s.str[g_s.cpt - 1] == '\0')
 		{
 			tmp = 0;
-			write(1, &s.str, s.cpt);
+			write(1, &g_s.str, g_s.cpt);
 			kill(info->si_pid, SIGUSR1);
 			reset_struct();
 		}
@@ -60,8 +60,8 @@ int	main(void)
 
 	sa.sa_sigaction = sig_handler;
 	sa.sa_flags = SA_SIGINFO;
-	s.cpt = 0;
-	ft_memset(s.str, 0, BUFFER);
+	g_s.cpt = 0;
+	ft_memset(g_s.str, 0, BUFFER);
 	print_pid();
 	while (1)
 	{
