@@ -12,6 +12,14 @@
 
 #include "minitalk.h"
 
+static int ack;
+
+static void 	rec_ack()
+{
+	ack = 1;
+	return ;
+}
+
 static void		send_binary(char c, int pid)
 {
 	int		i;
@@ -33,17 +41,20 @@ int				main(int ac, char **av)
 	char	*str;
 	int		pid;
 
+	ack = 0;
+	signal(SIGUSR1, rec_ack);
 	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
 		str = av[2];
-		send_binary('\0', pid);
 		while (*str)
 		{
 			send_binary(*str, pid);
 			str++;
 		}
 		send_binary('\0', pid);
+		if (ack == 1)
+			ft_putendl_fd("Message received!", 1);
 	}
 	else
 		ft_putstr_fd("Error\nWrong number of arguments\n", 1);

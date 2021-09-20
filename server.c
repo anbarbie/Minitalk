@@ -29,11 +29,12 @@ static	void 	reset_struct()
 	s.cpt = 0;
 }
 
-static 	void	sig_handler(int signum)
+static 	void	sig_handler(int signum, siginfo_t *info, void *context)
 {
 	static int		i = 0;
 	static unsigned char		tmp = 0;
 
+	(void)context;
 	if (signum == SIGUSR2)
 		tmp |= 1;
 	if (i == 7)
@@ -43,10 +44,9 @@ static 	void	sig_handler(int signum)
 		s.cpt++;
 		if (s.cpt == BUFFER || s.str[s.cpt - 1] == '\0')
 		{
-			if (!s.str[0])
-				write(1 , "Signal caught!\n", 14);
 			tmp = 0;
 			write(1, &s.str, s.cpt);
+			kill(info->si_pid, SIGUSR1);
 			reset_struct();
 		}
 	}
@@ -58,7 +58,7 @@ int		main(void)
 {	
 	struct sigaction	sa;
 
-	sa.sa_handler = sig_handler;
+	sa.sa_sigaction = sig_handler;
 	sa.sa_flags = SA_SIGINFO;
 	s.cpt = 0;
 	ft_memset(s.str, 0, BUFFER);

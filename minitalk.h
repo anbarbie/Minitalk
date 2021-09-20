@@ -17,7 +17,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include "./libft/libft.h"
-# define BUFFER 64
+# define BUFFER 1024
 
 typedef struct		sbuff
 {
