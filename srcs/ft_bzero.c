@@ -6,7 +6,7 @@
 /*   By: antbarbi <antbarbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 17:57:58 by antbarbi          #+#    #+#             */
-/*   Updated: 2021/09/20 20:59:42 by antbarbi         ###   ########.fr       */
+/*   Updated: 2021/09/20 21:38:40 by antbarbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char *ptr;
+	unsigned char	*ptr;
 
 	ptr = s;
 	while (n-- > 0)

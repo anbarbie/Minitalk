@@ -6,7 +6,7 @@
 /*   By: antbarbi <antbarbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 19:44:54 by antbarbi          #+#    #+#             */
-/*   Updated: 2021/09/20 20:59:25 by antbarbi         ###   ########.fr       */
+/*   Updated: 2021/09/20 21:40:03 by antbarbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	int div;
+	int	div;
 
 	div = 1;
 	if (n == -2147483648)
