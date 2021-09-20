@@ -6,21 +6,21 @@
 /*   By: antbarbi <antbarbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 22:42:17 by antbarbi          #+#    #+#             */
-/*   Updated: 2021/08/16 22:42:17 by antbarbi         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:21:17 by antbarbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static int ack;
+static int		g_ack;
 
-static void 	rec_ack()
+static	void	rec_ack(void)
 {
-	ack = 1;
+	g_ack = 1;
 	return ;
 }
 
-static void		send_binary(char c, int pid)
+static	void	send_binary(char c, int pid)
 {
 	int		i;
 
@@ -36,7 +36,7 @@ static void		send_binary(char c, int pid)
 	}
 }
 
-int				main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	char	*str;
 	int		pid;
@@ -53,7 +53,7 @@ int				main(int ac, char **av)
 			str++;
 		}
 		send_binary('\0', pid);
-		if (ack == 1)
+		if (g_ack == 1)
 			ft_putendl_fd("Message received!", 1);
 	}
 	else

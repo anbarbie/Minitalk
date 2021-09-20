@@ -6,7 +6,7 @@
 /*   By: antbarbi <antbarbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 21:10:26 by antbarbi          #+#    #+#             */
-/*   Updated: 2021/08/16 21:10:26 by antbarbi         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:26:50 by antbarbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include "./libft/libft.h"
 # define BUFFER 1024
 
-typedef struct		sbuff
+typedef struct s_buff
 {
 	char			str[BUFFER];
 	int				cpt;
-}					tbuff;
+}					t_buff;
 
 #endif
